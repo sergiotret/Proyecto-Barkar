@@ -78,47 +78,4 @@ sensorValue = analogRead(sensorpin);
     break;
   }
   Serial.println(sensorValue, DEC);
-  /*int value = 0;
-  value = digitalRead(9 );  //lectura digital de pin
- 
-    /*Serial.println("Detectada lluvia");
-     // Desplazamos a la posición 0º
-  // Desplazamos a la posición 180º
-  servoMotor.write(180);
-  Vamos a tener dos bucles uno para mover en sentido positivo y otro en sentido negativo
-   Para el sentido positivo
-/*  for (int i = 0; i=180; i++)
-  {
-    // Desplazamos al ángulo correspondiente
-    servoMotor.write(i);
-    // Hacemos una pausa de 25ms
-    delay(1000);
-  }
-  }*/
 }
-/*void setup() {
-  // Iniciamos el monitor serie para mostrar el resultado
-  Serial.begin(9600);
- 
-  // Iniciamos el servo para que empiece a trabajar con el pin 8
-  servoMotor.attach(10);
-}
- 
-void loop() {
-  
-  // Desplazamos a la posición 0º
-  servoMotor.write(0);
-  // Esperamos 1 segundo
-  delay(1000);
-  
-  // Desplazamos a la posición 90º
-  servoMotor.write(90);
-  // Esperamos 1 segundo
-  delay(1000);
-  
-  // Desplazamos a la posición 180º
-  servoMotor.write(180);
-  // Esperamos 1 segundo
-  delay(1000);
-}
-*/
