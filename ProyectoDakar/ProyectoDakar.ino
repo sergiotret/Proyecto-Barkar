@@ -52,7 +52,9 @@ void loop(){
   {
     servoMotor.write(90);
   }
-//PARA EL FOTORESISTOR
+
+  
+//PARA EL FOTORESISTOR, USE LA MISMA SINTAXIS QUE CON EL SENSOR DE LLUVIA
 //CODIGO SENCILLO, DEPENDIENDO LA CANTIDAD DE LUZ DETERMINA SI ENCIENDE UN LED, O ENCIENDE AMBOS LEDS
 sensorValue = analogRead(sensorpin);
   int range2=map(sensorValue, sensormin2, sensormax2,0,3);
