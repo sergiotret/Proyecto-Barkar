@@ -1,3 +1,4 @@
+//quite los switch para trabajar con if, ire modificando para optimizarlo, pero ya funciona con este codigo
 #include <Servo.h>
 int foco=13; //usaremos el led de arduino
 Servo servoMotor;
