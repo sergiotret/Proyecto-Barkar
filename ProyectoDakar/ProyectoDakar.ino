@@ -7,10 +7,11 @@ const int sensorMax = 1024;
 const int sensormin2 = 0;
 const int sensormax2 = 1024;
 int sensorpin = A1;
-int ledpin = 5;
 int ledpin2 = 3; 
 int sensorValue = 0;
 int dato=0;
+int dato2=0;
+int dato3=0;
 void setup() {
   Serial.begin(9600);
   pinMode(foco,OUTPUT); //->salida del foco
@@ -21,7 +22,6 @@ void setup() {
   servoMotor.attach(10);
   Serial.begin(9600);
   //leds del FOTORESISTOR--------------------------------------------
-  pinMode(ledpin, OUTPUT);
   pinMode(ledpin2, OUTPUT);
   Serial.begin(9600);
 }
@@ -32,45 +32,64 @@ void loop() {
   dato=Serial.read(); //lo que se lea del bluetooth, es decir lo mandará la app
   }
   if(dato == '1')
-  {digitalWrite(foco,HIGH);
-  Serial.println("Foco encendido");
+  {
+    Serial.println("Foco encendido");
+    digitalWrite(foco,HIGH);
+    digitalWrite(ledpin2,HIGH);
+    dato3=3;
     }
   if(dato == '2')
     {
-      digitalWrite(foco,LOW);
       Serial.println("foco apagado");
+      digitalWrite(foco,LOW);
+      digitalWrite(ledpin2,LOW);
+      dato3=4;
      }
 if(dato == '3')
     {
-      digitalWrite(foco,LOW);
-      Serial.println("foco ENCENDIDO");
-      servoMotor.write(90);
+      Serial.println("Sistema encendido");
+      servoMotor.write(180);
+      dato2=3;
+     }
+     if(dato == '4')
+    {
+      Serial.println("Sistema Apagado");
+      servoMotor.write(0);
+      dato2=4;
+     }
+     if(dato == '5')
+    {
+      Serial.println("Sistema en modo automatico");
+      dato2=0;
+      dato3=0;
      }
     int sensorReading= analogRead(A0);
     //el sensor al no detectar agua regresa a su posicion original
-    if(sensorReading>=1014)
+    if(sensorReading>=1014 && dato2!=3)
     {
-      servoMotor.write(90);
+      servoMotor.write(0);
     }
     //si detecta agyua 
-    if (sensorReading<=670)
+    if (sensorReading<=670 && dato2!=4)
     {
       servoMotor.write(180);
     }
+    Serial.println(sensorReading);
     delay(5000);
       //PARA EL FOTORESISTOR
       //CODIGO SENCILLO, DEPENDIENDO LA CANTIDAD DE LUZ DETERMINA SI ENCIENDE UN LED, O ENCIENDE AMBOS LEDS
       sensorValue = analogRead(sensorpin);
      // si el sensor no detecta luz, automaticamente se encienden
-     if(sensorValue>=1000)
+     if(sensorValue>=1000 && dato3!=4)
     {
-      digitalWrite(ledpin,HIGH);
+      digitalWrite(foco,HIGH);
       digitalWrite(ledpin2,HIGH);
     }
-    //si detecta luz, se enciende
-    if (sensorValue<=600)
+    //si detecta luz, se apaga
+    if (sensorValue<=600 && dato3!=3)
     {
-      digitalWrite(ledpin,LOW);
+      digitalWrite(foco,LOW);
       digitalWrite(ledpin2,LOW);
     }
+    Serial.println(dato);
 }
