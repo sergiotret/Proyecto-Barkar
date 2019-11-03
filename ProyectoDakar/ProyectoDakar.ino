@@ -34,7 +34,7 @@ void setup() {
   pinMode(ledpin2, OUTPUT);
   Serial.begin(9600);
   //SERVOMOTOR COMEDOR
-  servoMotor.attach(11);
+  servoMotor2.attach(11);
   Serial.begin(9600);
 }
 void loop() {
